@@ -175,7 +175,9 @@ main(int argc, char *argv[])
     }
 
   /* parse headers and build symbol tree */
+#ifndef DISABLE_YACC
   parse_headers();
+#endif
 
   /* load file */
   if( (dos_hdr = load_pe_image(filename)) == NULL )
@@ -417,6 +419,7 @@ IMAGE_DOS_HEADER *load_pe_image(const char *filename)
   return phdr;
 }
 
+#ifndef DISABLE_YACC
 /* parse headers to build symbol tree */
 void
 parse_headers()
@@ -490,6 +493,8 @@ parse_headers()
   yyparse();
   pclose(f);
 }
+
+#endif
 
 /* allocate memory; abort on failure */
 static void *xmalloc(size_t count)
