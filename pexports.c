@@ -71,10 +71,12 @@ void help(void) {
 	"the GNU General Public License.  This program has absolutely no warranty.\n"
 
 	"\nUsage: %s [-v] [-o] [-h header] [-p preprocessor] dll\n"
-	"  -h\tparse header\n"
-	"  -o\tprint ordinals\n"
-	"  -p\tset preprocessor program\n"
-	"  -v\tverbose mode\n"
+	"  -h\t\tparse header\n"
+	"  -o\t\tprint ordinals\n"
+	"  -p\t\tset preprocessor program\n"
+	"  -v\t\tverbose mode\n"
+  "  --version\tprint version information\n"
+  "  --help\tprint this help\n"
 	"\nReport bugs as directed at %s\n",
 	PACKAGE_VERSION_STRING, program_name, PACKAGE_BUG_REPORT);
 }
