@@ -62,6 +62,23 @@ static int ordinal_flag = 0;
 
 extern FILE *yyin;
 
+void help(void) {
+  printf(
+	"PExports %s; Originally written 1998, Anders Norlander\n"
+   	"Updated 1999, Paul Sokolovsky, 2008, Tor Lillqvist, 2013, 2015, Keith Marshall\n"
+	"Copyright (C) 1998, 1999, 2008, 2013, 2015, MinGW.org Project\n\n"
+	"This program is free software; you may redistribute it under the terms of\n"
+	"the GNU General Public License.  This program has absolutely no warranty.\n"
+
+	"\nUsage: %s [-v] [-o] [-h header] [-p preprocessor] dll\n"
+	"  -h\tparse header\n"
+	"  -o\tprint ordinals\n"
+	"  -p\tset preprocessor program\n"
+	"  -v\tverbose mode\n"
+	"\nReport bugs as directed at %s\n",
+	PACKAGE_VERSION_STRING, program_name, PACKAGE_BUG_REPORT);
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -129,6 +146,16 @@ main(int argc, char *argv[])
                 }
               cpp = argv[i];
               break;
+            case '-':
+              if (strcmp(argv[i], "--help") == 0)
+              {
+                help();
+                return 0;
+              } else if (strcmp(argv[i], "--version") == 0) {
+                printf("PExports %s\n", PACKAGE_VERSION_STRING);
+                return 0;
+              }
+              /* fall through */
             default:
               fprintf(stderr, "%s: Unknown option: %s\n",
                       program_name, argv[i]);
@@ -141,20 +168,7 @@ main(int argc, char *argv[])
 
   if (filename == NULL)
     {
-      printf(
-	"PExports %s; Originally written 1998, Anders Norlander\n"
-   	"Updated 1999, Paul Sokolovsky, 2008, Tor Lillqvist, 2013, 2015, Keith Marshall\n"
-	"Copyright (C) 1998, 1999, 2008, 2013, 2015, MinGW.org Project\n\n"
-	"This program is free software; you may redistribute it under the terms of\n"
-	"the GNU General Public License.  This program has absolutely no warranty.\n"
-
-	"\nUsage: %s [-v] [-o] [-h header] [-p preprocessor] dll\n"
-	"  -h\tparse header\n"
-	"  -o\tprint ordinals\n"
-	"  -p\tset preprocessor program\n"
-	"  -v\tverbose mode\n"
-	"\nReport bugs as directed at %s\n",
-	PACKAGE_VERSION_STRING, program_name, PACKAGE_BUG_REPORT);
+      help();
       return 1;
     }
 
